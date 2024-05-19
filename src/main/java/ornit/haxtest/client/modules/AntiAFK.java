@@ -1,11 +1,9 @@
 package ornit.haxtest.client.modules;
 
-import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.entity.MovementType;
-import net.minecraft.network.packet.c2s.play.ClientCommandC2SPacket;
 import net.minecraft.util.math.Vec3d;
 import ornit.haxtest.client.Utils;
-import net.minecraft.client.option.KeyBinding;
+
 public class AntiAFK {
     private static long lastMoveTime = 0;
     private static final long MOVE_DELAY_MS = 1000;

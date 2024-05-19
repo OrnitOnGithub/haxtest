@@ -21,7 +21,7 @@ public class HaxtestClient implements ClientModInitializer {
 
         // Anti AFK Key-bind
         KeyBinding antiafkKeyBind = KeyBindingHelper.registerKeyBinding(new KeyBinding(
-                "key.haxtest.antiafk", // The translation key of the keybinding's name
+                "key.haxtest.anti_afk", // The translation key of the keybinding's name
                 InputUtil.Type.KEYSYM, // The type of the keybinding, KEYSYM for keyboard, MOUSE for mouse.
                 GLFW.GLFW_KEY_H, // The keycode of the key
                 "category.haxtest.hax" // The translation key of the keybinding's category.
@@ -29,6 +29,20 @@ public class HaxtestClient implements ClientModInitializer {
         // Speed Key-bind
         KeyBinding speedKeybind = KeyBindingHelper.registerKeyBinding(new KeyBinding(
                 "key.haxtest.speed",
+                InputUtil.Type.KEYSYM,
+                GLFW.GLFW_KEY_H,
+                "category.haxtest.hax"
+        ));
+        // ChestESP Key-bind
+        KeyBinding chestESPKeyBind = KeyBindingHelper.registerKeyBinding(new KeyBinding(
+                "key.haxtest.chest_esp",
+                InputUtil.Type.KEYSYM,
+                GLFW.GLFW_KEY_H,
+                "category.haxtest.hax"
+        ));
+        // AimBot Key-bind
+        KeyBinding aimBotKeyBind = KeyBindingHelper.registerKeyBinding(new KeyBinding(
+                "key.haxtest.aimbot",
                 InputUtil.Type.KEYSYM,
                 GLFW.GLFW_KEY_H,
                 "category.haxtest.hax"
@@ -46,12 +60,24 @@ public class HaxtestClient implements ClientModInitializer {
 
             // SPEED
             if (speedKeybind.wasPressed()) {
-                Speed.ToggleSPeed();
+                Speed.ToggleSpeed();
             }
             if (Speed.speedRunning) {
                 Speed.Speed();
             }
 
+            // CHEST ESP
+            if (chestESPKeyBind.wasPressed()) {
+                ChestESP.ChestESP();
+            }
+
+            // AIM BOT
+            if (aimBotKeyBind.wasPressed()) {
+                AimBot.ToggleAimBot();
+            }
+            if (AimBot.aimBotting) {
+                AimBot.AimBot();
+            }
         });
     }
 
