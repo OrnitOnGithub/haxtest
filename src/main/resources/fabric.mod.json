@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "id": "haxtest",
+  "version": "${version}",
+  "name": "haxtest",
+  "description": "",
+  "authors": ["Ornithopter747"],
+  "contact": {
+    "repo": "https://github.com/OrnitOnGithub/haxtest"
+  },
+  "license": "MIT",
+  "icon": "assets/haxtest/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "client": [
+      "ornit.haxtest.client.HaxtestClient"
+    ],
+    "main": [
+      "ornit.haxtest.Haxtest"
+    ]
+  },
+  "depends": {
+    "fabricloader": ">=${loader_version}",
+    "fabric": "*",
+    "minecraft": "${minecraft_version}"
+  }
+}
