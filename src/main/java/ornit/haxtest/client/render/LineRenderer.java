@@ -32,7 +32,7 @@ public class LineRenderer {
         bufferBuilder.vertex(matrix4f, (float) pos2.x, (float) pos2.y, (float) pos2.z).next();
 
         tessellator.draw();
-        RenderSystem.setShaderColor(r, g, b, a);
+        RenderSystem.setShaderColor(1, 1, 1, 1);
 
         GL11.glEnable(GL11.GL_DEPTH_TEST);
         GL11.glDisable(GL11.GL_BLEND);

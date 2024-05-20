@@ -18,7 +18,6 @@ public class AimBot {
 
     public static void Run() {
         System.out.println("AimBot is in use.");
-        Utils.MC.player.changeLookDirection(0, 0);
 
         // Find the closest player
         int index = 0;
@@ -38,7 +37,7 @@ public class AimBot {
             }
             index++;
         }
-        if (shortestIndex != 0) { // i don't think this if is needed.
+        if (shortestIndex != 0) { // I don't think this if is needed.
             List<AbstractClientPlayerEntity> players = Utils.MC.world.getPlayers(); // Use getPlayers() instead of getEntities()
             AbstractClientPlayerEntity closestPlayer = players.get(shortestIndex); // Get the closest player from the list
             System.out.println(closestPlayer);

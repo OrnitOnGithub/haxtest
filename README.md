@@ -3,13 +3,14 @@
 Shitty ornithopter747 homemade hacked client for Minecraft.
 
 ## TODO
+
 In order of importance:
 - [x] Speed
 - [x] Anti-AFK (not 2b2t compatible)
 - [x] Aim-bot (closest player)
 - [x] Chest ESP
 - [x] Player ESP
-- [ ] Autoclicker (perfect 1.9+ pvp timings)
+- [ ] Auto-clicker (perfect 1.9+ pvp timings)
 - [ ] New chunks
 - [ ] Baritone integration
 - [ ] Trajectories
@@ -20,7 +21,7 @@ In order of importance:
 ### Install
 
 - Clone the repository
-- Changedir into it
+- Change dir into it
 - run `./gradlew build` to build it with gradle
 - The mod can be found in `build/libs/haxtest-<version>.jar`. Add it to your `mods` folder. It requires fabric and
   the fabric API.

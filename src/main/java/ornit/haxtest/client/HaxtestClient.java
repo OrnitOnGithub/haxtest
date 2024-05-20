@@ -64,12 +64,19 @@ public class HaxtestClient implements ClientModInitializer {
                 GLFW.GLFW_KEY_H,
                 "category.haxtest.hax"
         ));
+        // AutoClicker Key-bind
+        KeyBinding autoClickerKeyBind = KeyBindingHelper.registerKeyBinding(new KeyBinding(
+                "key.haxtest.auto_clicker",
+                InputUtil.Type.KEYSYM,
+                GLFW.GLFW_KEY_H,
+                "category.haxtest.hax"
+        ));
 
 
         // Register a client tick event to check for key presses
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
 
-            // Clear all rendered lines every tick.
+            // Clear all rendered lines every tick. // this is inefficient
             RenderUtils.clear();
 
             // ANTI AFK
@@ -110,6 +117,14 @@ public class HaxtestClient implements ClientModInitializer {
             }
             if (AimBot.active) {
                 AimBot.Run();
+            }
+
+            // AUTO CLICKER
+            if (autoClickerKeyBind.wasPressed()) {
+                AutoClicker.Toggle();
+            }
+            if (AutoClicker.active) {
+                AutoClicker.Run();
             }
         });
     }

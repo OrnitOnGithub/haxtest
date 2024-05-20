@@ -13,7 +13,7 @@ import ornit.haxtest.client.render.RenderUtils;
 
 public class ChestESP {
     public static boolean active = false;
-    public static Color chestESPColor = new Color(1, 1, 1, 1);
+    public static Color chestESPColor = new Color(1, 1, 0, 1);
 
     public static void Toggle() {
         active = !active;
