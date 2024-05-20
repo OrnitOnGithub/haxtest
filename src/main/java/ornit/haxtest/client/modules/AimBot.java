@@ -8,16 +8,16 @@ import net.minecraft.util.math.Vec3d;
 import ornit.haxtest.client.Utils;
 
 public class AimBot {
-    public static boolean aimBotting = false;
+    public static boolean active = false;
     public static double aimbotEngageDistance = 7;
     public static double eyeHeightOffset = 1.5;
 
-    public static void ToggleAimBot() {
-        aimBotting = !aimBotting;
+    public static void Toggle() {
+        active = !active;
     }
 
-    public static void AimBot() {
-        System.out.println("Aimbotting.");
+    public static void Run() {
+        System.out.println("AimBot is in use.");
         Utils.MC.player.changeLookDirection(0, 0);
 
         // Find the closest player
@@ -38,7 +38,7 @@ public class AimBot {
             }
             index++;
         }
-        if (shortestIndex != 0) {
+        if (shortestIndex != 0) { // i don't think this if is needed.
             List<AbstractClientPlayerEntity> players = Utils.MC.world.getPlayers(); // Use getPlayers() instead of getEntities()
             AbstractClientPlayerEntity closestPlayer = players.get(shortestIndex); // Get the closest player from the list
             System.out.println(closestPlayer);

@@ -5,15 +5,15 @@ import net.minecraft.util.math.Vec3d;
 import ornit.haxtest.client.Utils;
 
 public class Speed {
-    public static boolean speedRunning = false;
+    public static boolean active = false;
     // an arbitrary value. 1 =/= normal speed
     public static float speedMultiplier = 7f;
 
-    public static void ToggleSpeed() {
-        speedRunning = !speedRunning;
+    public static void Toggle() {
+        active = !active;
     }
 
-    public static void Speed() {
+    public static void Run() {
         Vec3d speedVec = new Vec3d(
                 Utils.MC.player.getRotationVecClient().x * speedMultiplier,
                 0f,

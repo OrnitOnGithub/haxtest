@@ -25,35 +25,4 @@ public class Utils {
             Thread.currentThread().interrupt();
         }
     }
-    public static void setKeyPressed(KeyBinding keyBinding, boolean pressed) {
-        InputUtil.Key key = keyBinding.getDefaultKey();
-        int keyCode = key.getCode();
-
-        // Update the key binding state
-        KeyBinding.setKeyPressed(key, pressed);
-
-        // Manually update the key pressed map
-        //InputUtil.setKeyPressed(keyCode, pressed);
-    }
-    public static void drawLine3D(Matrix4f matrix4f, Vec3d pos, Vec3d pos2, float r, float g, float b, float a) {
-        RenderSystem.setShaderColor(r, g, b, a);
-
-        GL11.glEnable(GL11.GL_BLEND);
-        GL11.glDisable(GL11.GL_DEPTH_TEST);
-
-        Tessellator tessellator = RenderSystem.renderThreadTesselator();
-        BufferBuilder bufferBuilder = tessellator.getBuffer();
-        RenderSystem.setShader(GameRenderer::getPositionProgram);
-
-        bufferBuilder.begin(VertexFormat.DrawMode.DEBUG_LINES, VertexFormats.POSITION);
-
-        bufferBuilder.vertex(matrix4f, (float) pos.x, (float) pos.y, (float) pos.z).next();
-        bufferBuilder.vertex(matrix4f, (float) pos2.x, (float) pos2.y, (float) pos2.z).next();
-
-        tessellator.draw();
-        RenderSystem.setShaderColor(1, 1, 1, 1);
-
-        GL11.glEnable(GL11.GL_DEPTH_TEST);
-        GL11.glDisable(GL11.GL_BLEND);
-    }
 }

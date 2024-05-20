@@ -8,14 +8,14 @@ public class AntiAFK {
     private static long lastMoveTime = 0;
     private static final long MOVE_DELAY_MS = 1000;
 
-    public static boolean antiAFKRunning = false;
+    public static boolean active = false;
     public static float speedMultiplier = 0.2f;
 
-    public static void ToggleAntiAFK() {
-        antiAFKRunning = !antiAFKRunning;
+    public static void Toggle() {
+        active = !active;
     }
 
-    public static void RunAntiAFK() {
+    public static void Run() {
         System.out.println("AntiAFK is in use!");
 
         // Move once left and once right, with some delay in between

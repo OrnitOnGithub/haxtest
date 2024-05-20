@@ -3,15 +3,17 @@
 Shitty ornithopter747 homemade hacked client for Minecraft.
 
 ## TODO
-
-- [x] Speed (works on vanilla servers)
-- [x] Anti-AFK (sucks ass not 2b2t compatible needs work)
-- [ ] Chest ESP (returns coordinates of all chests in console)
-- [ ] Player ESP (aimbot knows player coords)
-- [x] Aim-bot (players)
+In order of importance:
+- [x] Speed
+- [x] Anti-AFK (not 2b2t compatible)
+- [x] Aim-bot (closest player)
+- [x] Chest ESP
+- [x] Player ESP
+- [ ] Autoclicker (perfect 1.9+ pvp timings)
+- [ ] New chunks
+- [ ] Baritone integration
+- [ ] Trajectories
 - [ ] Breadcrumbs
-- [ ] Baritone integration?
-- [ ] Trajectories?
 
 ## How to use
 
@@ -31,5 +33,21 @@ cd haxtest
 
 ### Use it
 
-This client does not have a mod menu, everything is a key-bind. Check Options > Controls > Key Binds in Minecraft.
+This client does not have a mod menu (yet), everything is a key-bind. Check Options > Controls > Key Binds in Minecraft.
 They're at the bottom usually.
+
+## Documentation
+
+java/ornit.haxtest/client is where all the good stuff happens.
+
+HaxtestClient.java is the "entry point" for the client. It defines keybinds, does the needed rendering,
+and calls the necessary modules.
+
+modules/ contains all the modules (hacks). Each module has three parts:
+- Module.active (bool)
+- Module.Toggle() (toggles module.active)
+- Module.Run() (runs the module, once) (HaxtestClient.java runs Module.Run() each tick if Module.active is true)
+
+render/ contains a bunch of functions for rendering.
+
+For even more info check the code lol

@@ -5,11 +5,14 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
+import net.fabricmc.fabric.api.client.rendering.v1.WorldRenderEvents;
 import net.minecraft.client.option.KeyBinding;
 import net.minecraft.client.util.InputUtil;
 import org.lwjgl.glfw.GLFW;
 
 import ornit.haxtest.client.modules.*;
+import ornit.haxtest.client.render.Line;
+import ornit.haxtest.client.render.RenderUtils;
 
 @Environment(EnvType.CLIENT)
 public class HaxtestClient implements ClientModInitializer {
@@ -17,7 +20,14 @@ public class HaxtestClient implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
 
-        System.out.println("Client initialised!");
+        // should get called each frame
+        // Draws all lines in RenderUtils.lineToRenderList
+        WorldRenderEvents.END.register(context -> {
+             for (Line line : RenderUtils.lineToRenderList) {
+                 line.Draw(context);
+             }
+        });
+
 
         // Anti AFK Key-bind
         KeyBinding antiafkKeyBind = KeyBindingHelper.registerKeyBinding(new KeyBinding(
@@ -40,46 +50,67 @@ public class HaxtestClient implements ClientModInitializer {
                 GLFW.GLFW_KEY_H,
                 "category.haxtest.hax"
         ));
+        // PlayerESP Key-bind
+        KeyBinding playerESPKeybind = KeyBindingHelper.registerKeyBinding(new KeyBinding(
+                "key.haxtest.player_esp",
+                InputUtil.Type.KEYSYM,
+                GLFW.GLFW_KEY_H,
+                "category.haxtest.hax"
+        ));
         // AimBot Key-bind
         KeyBinding aimBotKeyBind = KeyBindingHelper.registerKeyBinding(new KeyBinding(
-                "key.haxtest.aimbot",
+                "key.haxtest.aim_bot",
                 InputUtil.Type.KEYSYM,
                 GLFW.GLFW_KEY_H,
                 "category.haxtest.hax"
         ));
 
+
         // Register a client tick event to check for key presses
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
+
+            // Clear all rendered lines every tick.
+            RenderUtils.clear();
+
             // ANTI AFK
             if (antiafkKeyBind.wasPressed()) {
-                AntiAFK.ToggleAntiAFK();
+                AntiAFK.Toggle();
             }
-            if (AntiAFK.antiAFKRunning) {
-                AntiAFK.RunAntiAFK();
+            if (AntiAFK.active) {
+                AntiAFK.Run();
             }
 
             // SPEED
             if (speedKeybind.wasPressed()) {
-                Speed.ToggleSpeed();
+                Speed.Toggle();
             }
-            if (Speed.speedRunning) {
-                Speed.Speed();
+            if (Speed.active) {
+                Speed.Run();
             }
 
             // CHEST ESP
             if (chestESPKeyBind.wasPressed()) {
-                ChestESP.ChestESP();
+                ChestESP.Toggle();
+            }
+            if (ChestESP.active) {
+                ChestESP.Run();
+            }
+
+            // PLAYER ESP
+            if (playerESPKeybind.wasPressed()) {
+                PlayerESP.Toggle();
+            }
+            if (PlayerESP.active) {
+                PlayerESP.Run();
             }
 
             // AIM BOT
             if (aimBotKeyBind.wasPressed()) {
-                AimBot.ToggleAimBot();
+                AimBot.Toggle();
             }
-            if (AimBot.aimBotting) {
-                AimBot.AimBot();
+            if (AimBot.active) {
+                AimBot.Run();
             }
         });
     }
-
-
 }
