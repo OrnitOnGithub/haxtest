@@ -14,8 +14,9 @@ public class PlayerESP {
         active = !active;
     }
     public static void Run() {
+        RenderUtils.setModActive("PlayerESP");
         for (PlayerEntity player : Utils.MC.world.getPlayers()) {
-            if (player != Utils.MC.player) {
+            if (player != Utils.MC.player) { // if not self
 
                 Vec3d playerPos = player.getPos();
                 Vec3d playerPosLower = new Vec3d(playerPos.x -0.5, playerPos.y + 0, playerPos.z -0.5);

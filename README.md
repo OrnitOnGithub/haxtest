@@ -10,7 +10,10 @@ In order of importance:
 - [x] Aim-bot (closest player)
 - [x] Chest ESP
 - [x] Player ESP
+- [x] KillAura (hardcoded sword timings) (closest player)
 - [ ] Auto-clicker (perfect 1.9+ pvp timings)
+- [x] HUD Mod List
+- [ ] Settings menu
 - [ ] New chunks
 - [ ] Baritone integration
 - [ ] Trajectories

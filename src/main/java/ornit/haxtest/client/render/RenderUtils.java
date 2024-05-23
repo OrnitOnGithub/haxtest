@@ -9,9 +9,28 @@ import java.util.ArrayList;
  */
 public class RenderUtils {
     public static ArrayList<Line> lineToRenderList = new ArrayList<>();
+    public static ArrayList<Text> textToRenderList = new ArrayList<>();
+    public static ArrayList<String> activeModList = new ArrayList<>();
+
+    public static int activeModListMargin = 10; // in pixels
 
     public static void drawLine(Vec3d posA, Vec3d posB, Color color) {
         lineToRenderList.add(new Line(posA, posB, color));
+    }
+    public static void drawText(String text, float posX, float posY, int colorInt) {
+        textToRenderList.add(new Text(text, posX, posY, colorInt));
+    }
+    public static void drawModList() {
+        int y_position = activeModListMargin;
+        int modColor = 0;
+        for (String activeMod : activeModList) {
+            drawText(activeMod, activeModListMargin, y_position, modColor);
+            y_position += 15;
+            modColor += 50;
+        }
+    }
+    public static void setModActive(String modName) {
+        activeModList.add(modName);
     }
 
     public static void drawCubeAtBlock(BlockPos blockPos, Color cubeColor) {
@@ -63,5 +82,7 @@ public class RenderUtils {
 
     public static void clear() {
         lineToRenderList.clear();
+        textToRenderList.clear();
+        activeModList.clear();
     }
 }

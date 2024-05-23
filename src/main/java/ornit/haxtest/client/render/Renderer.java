@@ -1,20 +1,19 @@
 package ornit.haxtest.client.render;
 
-import net.minecraft.client.render.BufferBuilder;
-import net.minecraft.client.render.GameRenderer;
-import net.minecraft.client.render.Tessellator;
-import net.minecraft.client.render.VertexFormat;
-import net.minecraft.client.render.VertexFormats;
+import net.minecraft.client.gui.DrawContext;
+import net.minecraft.client.render.*;
+import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.math.Vec3d;
 import com.mojang.blaze3d.systems.RenderSystem;
 import org.joml.Matrix4f;
 import org.lwjgl.opengl.GL11;
+import ornit.haxtest.client.Utils;
 
 /*
  * Draws a line. Called by Line.Draw(). Line.Draw() is called in HaxTestClient
  * for each line in RenderUtils.lineToDrawList.
  */
-public class LineRenderer {
+public class Renderer {
 
     public static void drawLine3D(Matrix4f matrix4f, Vec3d pos, Vec3d pos2, float r, float g, float b, float a) {
         RenderSystem.setShaderColor(r, g, b, a);
@@ -42,5 +41,13 @@ public class LineRenderer {
         //Tessellator tessellator = Tessellator.getInstance();
         //BufferBuilder bufferBuilder = tessellator.getBuffer();
         //bufferBuilder.clear();
+    }
+    public static void drawString(DrawContext drawContext, String text, float x, float y, int color) {
+        MatrixStack matrixStack = drawContext.getMatrices();
+        matrixStack.push();
+        matrixStack.scale(1.0f, 1.0f, 1.0f);
+        matrixStack.translate(-x / 2, -y / 2, 0.0f);
+        drawContext.drawText(Utils.MC.textRenderer, text, (int)x, (int)y, color, false);
+        ((MatrixStack) matrixStack).pop();
     }
 }

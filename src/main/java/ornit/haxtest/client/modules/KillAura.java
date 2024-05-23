@@ -1,29 +1,40 @@
 package ornit.haxtest.client.modules;
 
+import net.minecraft.client.network.AbstractClientPlayerEntity;
 import net.minecraft.command.argument.EntityAnchorArgumentType;
 import net.minecraft.entity.Entity;
-import net.minecraft.client.network.AbstractClientPlayerEntity;
-import java.util.List;
+import net.minecraft.util.Hand;
 import net.minecraft.util.math.Vec3d;
 import ornit.haxtest.client.Utils;
 import ornit.haxtest.client.render.RenderUtils;
 
-public class AimBot {
+import java.util.List;
+
+public class KillAura {
     public static boolean active = false;
-    public static double aimbotEngageDistance = 7;
-    public static double eyeHeightOffset = 1.5;
+    /*
+     * Delay between kill-aura hits (in ticks)
+     */
+    public static int tickHitDelay = 12;
+    // holds current time passed. Hit only when this is bigger than tickHitDelay
+    public static int currentTickDelay = 0;
 
     public static void Toggle() {
         active = !active;
     }
 
     public static void Run() {
-        RenderUtils.setModActive("AimBot");
+        RenderUtils.setModActive("KillAura");
+        //long windowHandle = client.getWindow().getHandle();
+
+        // Simulate mouse button press and release
+        //InputUtil.setMouseButtonState(windowHandle, GLFW.GLFW_MOUSE_BUTTON_1, true);
+        //InputUtil.setMouseButtonState(windowHandle, GLFW.GLFW_MOUSE_BUTTON_1, false);
 
         // Find the closest player
         int index = 0;
         int shortestIndex = 0;
-        double shortestDistance = aimbotEngageDistance; // initial value is also min distance
+        double shortestDistance = AimBot.aimbotEngageDistance; // initial value is also min distance
         for (Entity playerEntity : Utils.MC.world.getPlayers()) {
             //Utils.MC.player.lookAt(EntityAnchorArgumentType.EntityAnchor.EYES, entity.getPos());
             Vec3d playerPos = Utils.MC.player.getPos();
@@ -37,11 +48,16 @@ public class AimBot {
             }
             index++;
         }
-        if (shortestIndex != 0) { // I don't think this is needed.
+        if (shortestIndex != 0 && currentTickDelay > tickHitDelay) { // I don't think this is needed.
             List<AbstractClientPlayerEntity> players = Utils.MC.world.getPlayers(); // Use getPlayers() instead of getEntities()
             AbstractClientPlayerEntity closestPlayer = players.get(shortestIndex); // Get the closest player from the list
-            Vec3d aimPos = new Vec3d(closestPlayer.getPos().x, closestPlayer.getPos().y + eyeHeightOffset, closestPlayer.getPos().z);
-            Utils.MC.player.lookAt(EntityAnchorArgumentType.EntityAnchor.EYES, aimPos);
+            //System.out.println(closestPlayer);
+            Utils.MC.interactionManager.attackEntity(Utils.MC.player, closestPlayer);
+            Utils.MC.player.swingHand(Hand.MAIN_HAND);
+            currentTickDelay = 0;
+        }
+        else {
+            currentTickDelay++;
         }
     }
 }

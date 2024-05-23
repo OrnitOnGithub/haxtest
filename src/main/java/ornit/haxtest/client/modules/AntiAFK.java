@@ -3,6 +3,7 @@ package ornit.haxtest.client.modules;
 import net.minecraft.entity.MovementType;
 import net.minecraft.util.math.Vec3d;
 import ornit.haxtest.client.Utils;
+import ornit.haxtest.client.render.RenderUtils;
 
 public class AntiAFK {
     private static long lastMoveTime = 0;
@@ -16,7 +17,7 @@ public class AntiAFK {
     }
 
     public static void Run() {
-        System.out.println("AntiAFK is in use!");
+        RenderUtils.setModActive("AntiAFK");
 
         // Move once left and once right, with some delay in between
         long currentTime = System.currentTimeMillis();

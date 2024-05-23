@@ -20,7 +20,7 @@ public class ChestESP {
     }
 
     public static void Run() {
-        System.out.println("ChestESP is in use");
+        RenderUtils.setModActive("ChestESP");
         int playerChunkPosX = Utils.MC.player.getChunkPos().x;
         int playerChunkPosZ = Utils.MC.player.getChunkPos().z;
 
