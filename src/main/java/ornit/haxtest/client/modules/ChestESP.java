@@ -3,6 +3,10 @@ package ornit.haxtest.client.modules;
 import java.util.ArrayList;
 
 import net.fabricmc.fabric.api.client.rendering.v1.WorldRenderEvents;
+import net.minecraft.block.BlockEntityProvider;
+import net.minecraft.block.BlockTypes;
+import net.minecraft.block.EnderChestBlock;
+import net.minecraft.block.entity.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.chunk.Chunk;
@@ -51,7 +55,27 @@ public class ChestESP {
                 // Temporary: print the position
                 // System.out.println("Tile entity at position: " + blockEntityPos);
                 // RenderUtils.drawLine(new Vec3d(blockEntityPos.getX() -1, blockEntityPos.getY() -1, blockEntityPos.getZ() -1), new Vec3d(blockEntityPos.getX(), blockEntityPos.getY(), blockEntityPos.getZ()));
+                BlockEntity blockEntity = chunk.getBlockEntity(blockEntityPos);
+                // Chest Enderchest trappedchest dropper dispenser hopper banner furnace brewingStand shulker barrel smoker blastfurnace beacon spawner enchantTable
+                if (   blockEntity instanceof ChestBlockEntity
+                    || blockEntity instanceof DropperBlockEntity
+                    || blockEntity instanceof EnderChestBlockEntity
+                    || blockEntity instanceof TrappedChestBlockEntity
+                    || blockEntity instanceof DispenserBlockEntity
+                    || blockEntity instanceof HopperBlockEntity
+                    || blockEntity instanceof BannerBlockEntity
+                    || blockEntity instanceof FurnaceBlockEntity
+                    || blockEntity instanceof BrewingStandBlockEntity
+                    || blockEntity instanceof ShulkerBoxBlockEntity
+                    || blockEntity instanceof BannerBlockEntity
+                    || blockEntity instanceof SmokerBlockEntity
+                    || blockEntity instanceof BlastFurnaceBlockEntity
+                    || blockEntity instanceof BeaconBlockEntity
+                    || blockEntity instanceof MobSpawnerBlockEntity
+                    || blockEntity instanceof EnchantingTableBlockEntity
+                ) {
                 RenderUtils.drawCubeAtBlock(blockEntityPos, chestESPColor);
+                }
             }
         }
     }

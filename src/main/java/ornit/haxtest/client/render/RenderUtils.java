@@ -2,6 +2,8 @@ package ornit.haxtest.client.render;
 
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
+import ornit.haxtest.client.Utils;
+
 import java.util.ArrayList;
 
 /*
@@ -13,6 +15,7 @@ public class RenderUtils {
     public static ArrayList<String> activeModList = new ArrayList<>();
 
     public static int activeModListMargin = 10; // in pixels
+    public static int modListEndYPos = activeModListMargin;
 
     public static void drawLine(Vec3d posA, Vec3d posB, Color color) {
         lineToRenderList.add(new Line(posA, posB, color));
@@ -21,16 +24,32 @@ public class RenderUtils {
         textToRenderList.add(new Text(text, posX, posY, colorInt));
     }
     public static void drawModList() {
-        int y_position = activeModListMargin;
         int modColor = 0;
         for (String activeMod : activeModList) {
-            drawText(activeMod, activeModListMargin, y_position, modColor);
-            y_position += 15;
+            drawText(activeMod, activeModListMargin, modListEndYPos, modColor);
+            modListEndYPos += 20;
             modColor += 50;
         }
     }
     public static void setModActive(String modName) {
         activeModList.add(modName);
+    }
+
+    public static void drawInfoHud() {
+        modListEndYPos = activeModListMargin;
+        int hudElementOffset = 20;
+        int margin = activeModListMargin;
+        Vec3d playerPos = Utils.MC.player.getPos();
+        String realCoordinates                = "Current : x: " + (int)playerPos.x     + " y: " + (int)playerPos.y     + " z: " + (int)playerPos.z;
+        String netherTranslatedCoordinates    = "N. Trans: x: " + (int)playerPos.x / 8 + " y: " + (int)playerPos.y / 8 + " z: " + (int)playerPos.z / 8;
+        String overworldTranslatedCoordinates = "O. Trans: x: " + (int)playerPos.x * 8 + " y: " + (int)playerPos.y * 8 + " z: " + (int)playerPos.z * 8;
+
+        RenderUtils.drawText(realCoordinates, margin, modListEndYPos, 255);
+        modListEndYPos += hudElementOffset;
+        RenderUtils.drawText(netherTranslatedCoordinates, margin, modListEndYPos, 255);
+        modListEndYPos += hudElementOffset;
+        RenderUtils.drawText(overworldTranslatedCoordinates, margin, modListEndYPos, 255);
+        modListEndYPos += hudElementOffset;
     }
 
     public static void drawCubeAtBlock(BlockPos blockPos, Color cubeColor) {

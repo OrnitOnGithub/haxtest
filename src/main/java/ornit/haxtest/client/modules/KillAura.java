@@ -15,7 +15,7 @@ public class KillAura {
     /*
      * Delay between kill-aura hits (in ticks)
      */
-    public static int tickHitDelay = 12;
+    public static int tickHitDelay = 2;
     // holds current time passed. Hit only when this is bigger than tickHitDelay
     public static int currentTickDelay = 0;
 
@@ -48,7 +48,7 @@ public class KillAura {
             }
             index++;
         }
-        if (shortestIndex != 0 && currentTickDelay > tickHitDelay) { // I don't think this is needed.
+        if (shortestIndex != 0 && currentTickDelay >= tickHitDelay) { // I don't think this is needed.
             List<AbstractClientPlayerEntity> players = Utils.MC.world.getPlayers(); // Use getPlayers() instead of getEntities()
             AbstractClientPlayerEntity closestPlayer = players.get(shortestIndex); // Get the closest player from the list
             //System.out.println(closestPlayer);

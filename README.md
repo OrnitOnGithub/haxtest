@@ -13,9 +13,10 @@ In order of importance:
 - [x] KillAura (hardcoded sword timings) (closest player)
 - [ ] Auto-clicker (perfect 1.9+ pvp timings)
 - [x] HUD Mod List
+- [x] HUD coords thingy
 - [ ] Settings menu
 - [ ] New chunks
-- [ ] Baritone integration
+- [ ] Baritone integration // really needed?
 - [ ] Trajectories
 - [ ] Breadcrumbs
 
