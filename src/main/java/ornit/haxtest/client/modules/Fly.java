@@ -16,11 +16,20 @@ public class Fly {
 
     public static void Run() {
         RenderUtils.setModActive("Fly");
-        Vec3d speedVec = new Vec3d(
-                0f,
+        if (Utils.MC.options.jumpKey.wasPressed()) {
+            Vec3d speedVec = new Vec3d(
+                Utils.MC.player.getVelocity().x,
                 flySpeed,
-                0f
-        );
-        Utils.MC.player.setVelocity(speedVec);
+                Utils.MC.player.getVelocity().z
+            );
+            Utils.MC.player.setVelocity(speedVec);
+        } else if (Utils.MC.options.sneakKey.wasPressed()) {
+            Vec3d speedVec = new Vec3d(
+                Utils.MC.player.getVelocity().x,
+                -flySpeed,
+                Utils.MC.player.getVelocity().z
+            );
+            Utils.MC.player.setVelocity(speedVec);
+        }
     }
 }

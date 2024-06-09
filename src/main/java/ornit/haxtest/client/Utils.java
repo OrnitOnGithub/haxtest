@@ -22,5 +22,7 @@ public class Utils {
         KillAura.active = false;
         PlayerESP.active = false;
         Speed.active = false;
+        Fly.active = false;
+        NoFallDamage.active = false;
     }
 }

@@ -94,6 +94,12 @@ public class HaxtestClient implements ClientModInitializer {
                 GLFW.GLFW_KEY_H,
                 "category.haxtest.hax"
         ));
+        KeyBinding noFallDamageKeyBind = KeyBindingHelper.registerKeyBinding(new KeyBinding(
+                "key.haxtest.no_fall_damage",
+                InputUtil.Type.KEYSYM,
+                GLFW.GLFW_KEY_H,
+                "category.haxtest.hax"
+        ));
 
 
         // Register a client tick event to check for key presses
@@ -149,6 +155,7 @@ public class HaxtestClient implements ClientModInitializer {
             if (KillAura.active) {
                 KillAura.Run();
             }
+
             // FLY
             if (flyKeyBind.wasPressed()) {
                 Fly.Toggle();
@@ -156,6 +163,17 @@ public class HaxtestClient implements ClientModInitializer {
             if (Fly.active) {
                 Fly.Run();
             }
+
+            // NO FALL DAMAGE
+            if (noFallDamageKeyBind.wasPressed()) {
+                NoFallDamage.Toggle();
+            }
+            if (NoFallDamage.active) {
+                NoFallDamage.Run();
+            }
+
+            ConfigUtil.updateSettings();
+
         });
     }
 
